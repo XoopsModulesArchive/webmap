@@ -1,0 +1,158 @@
+<{* $Id: webmap_inc_get_location_js.html,v 1.1 2009/03/06 11:45:55 ohwada Exp $ *}>
+
+<{if $show_google_js }>
+  <script src="http://maps.google.com/maps?file=api&amp;hl=<{$xoops_langcode}>&amp;v=2&amp;key=<{$apikey}>" type="text/javascript" charset="utf-8"></script>
+<{/if}>
+
+<{if $show_gmap_js }>
+  <script src="<{$xoops_url}>/modules/<{$xoops_dirname}>/libs/gmap.js" type="text/javascript"></script>
+<{/if}>
+
+<script type="text/javascript">
+//<![CDATA[
+
+<{* value: numeric *}>
+<{if $latitude != "" }>
+	webmap_gmap_default_latitude = <{$latitude}>;
+<{/if}>
+<{if $longitude != "" }>
+	webmap_gmap_default_longitude = <{$longitude}>;
+<{/if}>
+<{if $zoom != "" }>
+	webmap_gmap_default_zoom = <{$zoom}>;
+<{/if}>
+
+<{* value: strings *}>
+<{if $module_url }>
+	webmap_gmap_module_url = "<{$module_url}>";
+<{/if}>
+<{if $marker_url }>
+	webmap_gmap_marker_url = "<{$marker_url}>";
+<{/if}>
+<{if $opener_mode }>
+	webmap_gmap_opener_mode = "<{$opener_mode}>";
+<{/if}>
+<{if $map_type }>
+	webmap_gmap_map_type = "<{$map_type}>";
+<{/if}>
+<{if $map_control }>
+	webmap_gmap_map_control = "<{$map_control}>";
+<{/if}>
+<{if $type_control }>
+	webmap_gmap_type_control = "<{$type_control}>";
+<{/if}>
+<{if $loc_marker_html != "" }>
+	webmap_gmap_location_marker_html = "<{$loc_marker_html}>";
+<{/if}>
+<{if $geocode_kind }>
+	webmap_gmap_geocode_kind = "<{$geocode_kind}>";
+<{/if}>
+<{if $geo_url }>
+	webmap_gmap_geo_url = "<{$geo_url}>";
+<{/if}>
+<{if $element_map }>
+	webmap_gmap_element_map = "<{$element_map}>";
+<{/if}>
+<{if $element_list }>
+	webmap_gmap_element_list = "<{$element_list}>";
+<{/if}>
+<{if $element_search }>
+	webmap_gmap_element_search = "<{$element_search}>";
+<{/if}>
+<{if $element_map }>
+	webmap_gmap_element_current_location = "<{$element_current_location}>";
+<{/if}>
+<{if $element_map }>
+	webmap_gmap_element_current_address = "<{$element_current_address}>";
+<{/if}>
+
+<{* value: strings : "true" or "false" *}>
+<{if $use_scale_control != "" }>
+	webmap_gmap_use_scale_control = <{$use_scale_control}>;
+<{/if}>
+<{if $use_overview_map_control != "" }>
+	webmap_gmap_use_overview_map_control = <{$use_overview_map_control}>;
+<{/if}>
+<{if $use_draggable_marker != "" }>
+	webmap_gmap_use_draggable_marker = <{$use_draggable_marker}>;
+<{/if}>
+<{if $use_search_marker != "" }>
+	webmap_gmap_use_search_marker = <{$use_search_marker}>;
+<{/if}>
+<{if $use_loc_marker != "" }>
+	webmap_gmap_use_location_marker = <{$use_loc_marker}>;
+<{/if}>
+<{if $use_loc_marker_click != "" }>
+	webmap_gmap_use_location_marker_click = <{$use_loc_marker_click}>;
+<{/if}>
+<{if $use_nishioka_inverse != "" }>
+	webmap_gmap_use_nishioka_inverse = <{$use_nishioka_inverse}>;
+<{/if}>
+<{if $use_set_parent_location != "" }>
+	webmap_gmap_use_set_parent_location =  <{$use_set_parent_location}>;
+<{/if}>
+<{if $use_set_parent_address != "" }>
+	webmap_gmap_use_set_parent_address =  <{$use_set_parent_address}>;
+<{/if}>
+
+<{* value: strings : Language *}>
+<{if $lang_latitude }>
+	webmap_gmap_lang_latitude = "<{$lang_latitude}>";
+<{/if}>
+<{if $lang_longitude }>
+	webmap_gmap_lang_longitude = "<{$lang_longitude}>";
+<{/if}>
+<{if $lang_zoom }>
+	webmap_gmap_lang_zoom = "<{$lang_zoom}>";
+<{/if}>
+<{if $lang_not_compatible }>
+	webmap_gmap_lang_not_compatible  = "<{$lang_not_compatible}>";
+<{/if}>
+<{if $lang_no_match_place }>
+	webmap_gmap_lang_no_match_place  = "<{$lang_no_match_place}>";
+<{/if}>
+
+<{* -- gmap loop -- *}>
+<{counter name="gmap_i" assign="gmap_mark_i" start=0 print=false }>
+<{foreach item=gmap from=$gmap_list}>
+
+	var marker = {};
+	marker["latitude"]  = <{$gmap_marker.latitude}>;
+	marker["longitude"] = <{$gmap_marker.longitude}>;
+	marker["icon_id"]   = <{$gmap_marker.icon_id}>;
+	marker["info"]      = '<{$gmap_marker.info}>';
+	webmap_gmap_markers[<{$gmap_marker_i}>] = marker;
+
+<{counter name="gmap_mark_i" assign="gmap_mark_i" print=false }>
+<{/foreach}>
+<{* -- gmap loop end -- *}>
+
+<{* -- gmap icon loop -- *}>
+<{counter name="gmap_icon_i" assign="gmap_icon_i" start=0 print=false }>
+<{foreach item=gmap_icon from=$gmap_icons}>
+
+	var icon = {};
+	icon["image_url"]     = "<{$gmap_icon.image_url}>";
+	icon["image_width"]   = <{$gmap_icon.image_width}>) ;
+	icon["image_height"]  = <{$gmap_icon.image_height}>) ;
+	icon["anchor_x"]      = <{$gmap_icon.anchor_x}>) ;
+	icon["anchor_y"]      = <{$gmap_icon.anchor_y}>) ;
+	icon["info_x"]        = <{$gmap_icon.info_x}>) ;
+	icon["info_x"]        = <{$gmap_icon.info_x}>) ;
+	icon["shadow_url"]    = "<{$gmap_icon.shadow_url}>";
+	icon["shadow_width"]  = <{$gmap_icon.shadow_width}>) ;
+	icon["shadow_height"] = <{$gmap_icon.shadow_height}>) ;
+	webmap_gmap_icons[<{$gmap_icon.gicon_id}>] = icon;
+
+<{counter name="gmap_icon_i" assign="gmap_icon_i" print=false }>
+<{/foreach}>
+<{* -- gmap icon loop end -- *}>
+
+window.onload   = webmap_gmap_load_get_location;
+window.onunload = GUnload;
+//]]>
+</script>
+
+<{if $show_element }>
+  <div id="<{$element}>" style="<{$style}>">Loading ...</div>
+<{/if}>

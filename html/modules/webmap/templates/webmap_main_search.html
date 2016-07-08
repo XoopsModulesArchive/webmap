@@ -1,0 +1,44 @@
+<{* $Id: webmap_main_search.html,v 1.1 2009/03/06 11:45:55 ohwada Exp $ *}>
+
+<{if $show_default_css }>
+  <link href="<{$xoops_url}>/modules/<{$xoops_dirname}>/libs/default.css" type="text/css" rel="stylesheet"/>
+<{/if}>
+
+<{* === gmap js === *}>
+<{$map_js}>
+
+<h3 align='center'><{$module_name}></h3>
+<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/index.php">[<{$lang_title_search}>]</a> 
+<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/index.php?fct=location">[<{$lang_title_location}>]</a> 
+<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/index.php?fct=georss">[<{$lang_title_georss}>]</a> 
+
+<h4><{$lang_title_search}></h4>
+<{$lang_title_search_desc}><br /><br />
+
+<noscript>
+  <div class="webmap_error"><{$lang_js_invalid}></div>
+</noscript>
+
+
+<form action="#" onsubmit="webmap_gmap_searchAddress(this.<{$element_search}>.value); return false">
+<{$lang_address}> 
+<input type="text" id="<{$element_search}>" name="<{$element_search}>" value="<{$address_s}>" size="60" />
+<input type="submit" value="<{$lang_search}>" />
+</form>
+<br />
+
+<b><{$lang_current_location}></b><br />
+<div id="<{$element_current_location}>"></div>
+<br />
+
+<b><{$lang_search_list}></b><br />
+<div id="<{$element_list}>"></div>
+<br />
+
+<div id="<{$element_map}>" class="webmap_map_search">Loading ...</div>
+<br />
+
+<{if $is_module_admin }>
+	<br /><hr />
+	<a href="./admin/index.php">go to admin cp</a>
+<{/if}>

@@ -1,0 +1,79 @@
+<{* $Id: inc_marker_js.html,v 1.1.1.1 2009/02/23 03:26:43 ohwada Exp $ *}>
+
+<{if $show_google_js }>
+  <script src="http://maps.google.com/maps?file=api&amp;hl=<{$xoops_langcode}>&amp;v=2&amp;key=<{$apikey}>" type="text/javascript" charset="utf-8"></script>
+<{/if}>
+
+<{if $show_map_js }>
+  <script src="<{$xoops_url}>/modules/<{$xoops_dirname}>/libs/map.js" type="text/javascript"></script>
+<{/if}>
+
+<script type="text/javascript">
+//<![CDATA[
+
+var webmap_marker_array = new Array();
+var webmap_icon_array   = new Array();
+
+<{* -- gmap photo_loop -- *}>
+<{counter name="gmap_marker_i" assign="gmap_marker_i" start=0 print=false }>
+<{foreach item=gmap_marker from=$gmap_markers}>
+	var marker = {};
+	marker["latitude"]  = <{$gmap_marker.latitude}>;
+	marker["longitude"] = <{$gmap_marker.longitude}>;
+	marker["icon_id"]   = <{$gmap_marker.icon_id}>;
+	marker["info"]      = '<{$gmap_marker.info}>';
+	webmap_marker_array[<{$gmap_marker_i}>] = marker;
+
+<{counter name="gmap_marker_i" assign="gmap_marker_i" print=false }>
+<{/foreach}>
+<{* -- gmap photo loop end -- *}>
+
+<{* -- gmap icon loop -- *}>
+<{counter name="gmap_icon_i" assign="gmap_icon_i" start=0 print=false }>
+<{foreach item=gmap_icon from=$gmap_icons}>
+	var icon = {};
+	icon["id"]            = <{$gmap_icon.id}>;
+	icon["image_url"]     = "<{$gmap_icon.image_url}>";
+	icon["image_width"]   = <{$gmap_icon.image_width}>;
+	icon["image_height"]  = <{$gmap_icon.image_height}>;
+	icon["anchor_x"]      = <{$gmap_icon.anchor_x}>;
+	icon["anchor_y"]      = <{$gmap_icon.anchor_y}>;
+	icon["info_x"]        = <{$gmap_icon.info_x}>;
+	icon["info_y"]        = <{$gmap_icon.info_y}>;
+	icon["shadow_url"]    = "<{$gmap_icon.shadow_url}>";
+	icon["shadow_width"]  = <{$gmap_icon.shadow_width}>;
+	icon["shadow_height"] = <{$gmap_icon.shadow_height}>;
+	webmap_icon_array[<{$gmap_icon_i}>] = icon;
+
+<{counter name="gmap_icon_i" assign="gmap_icon_i" print=false }>
+<{/foreach}>
+<{* -- gmap icon loop end -- *}>
+
+function webmap_load_marker_<{$id}>() 
+{
+	var webmap_param = {};
+	webmap_param["latitude"]     = <{$latitude}>;
+	webmap_param["longitude"]    = <{$longitude}>;
+	webmap_param["zoom"]         = <{$zoom}>;
+	webmap_param["element_map"]  = "<{$element_map}>";
+	webmap_param["map_type"]     = "<{$map_type}>";
+	webmap_param["map_control"]  = "<{$map_control}>";
+	webmap_param["type_control"] = "<{$type_control}>";
+	webmap_param["use_scale_control"]        = <{$use_scale_control}>;
+	webmap_param["use_overview_map_control"] = <{$use_overview_map_control}>;
+
+	if ( GBrowserIsCompatible() ) {
+		webmap_map_marker( webmap_param, webmap_marker_array, webmap_icon_array );
+	} else {
+		alert( "<{$lang_not_compatible}>" );
+	}
+}
+
+window.onload   = webmap_load_marker_<{$id}>;
+window.onunload = GUnload;
+//]]>
+</script>
+
+<{if $show_element }>
+  <div id="<{$element_map}>" style="<{$style}>">Loading ...</div>
+<{/if}>

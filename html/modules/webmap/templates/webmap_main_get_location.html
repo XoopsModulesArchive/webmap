@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<{$xoops_langcode}>" lang="<{$xoops_langcode}>">
+<head>
+<{* $Id: webmap_main_get_location.html,v 1.1 2009/03/06 11:45:55 ohwada Exp $ *}>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00 GMT" />
+<title>webmap - <{$lang_title}></title>
+<link href="<{$xoops_url}>/modules/<{$xoops_dirname}>/libs/default.css" type="text/css" rel="stylesheet"/>
+<script src="http://maps.google.com/maps?file=api&amp;hl=<{$xoops_langcode}>&amp;v=2&amp;key=<{$apikey}>" type="text/javascript" charset="utf-8"></script>
+<script src="<{$xoops_url}>/modules/<{$xoops_dirname}>/libs/gmap.js" type="text/javascript"></script>
+</head>
+<body>
+
+<{* === gmap js === *}>
+<{$map_js}>
+
+<h4><{$lang_title}></h4>
+
+<noscript>
+  <div class="webmap_error"><{$lang_js_invalid}></div>
+</noscript>
+
+<form action="#" onsubmit="webmap_gmap_searchAddress(this.<{$element_search}>.value); return false">
+<{$lang_address}> 
+<input type="text" id="<{$element_search}>" name="<{$element_search}>" value="<{$default_address}>" size="60" />
+<input type="submit" value="<{$lang_search}>" />
+</form>
+<br />
+
+<b><{$lang_current_location}></b><br />
+<div id="<{$element_current_location}>"></div>
+<br />
+
+<b><{$lang_search_list}></b><br />
+<div id="<{$element_list}>"></div>
+<br />
+
+<div id="<{$element_map}>" style="<{$style}>" >Loading ...</div>
+<br />
+
+<input type="button" value="<{$lang_get_location}>" onclick="webmap_gmap_setParentCenterLocation()" />
+
+<{if $show_set_addr_jp }>
+  <input type="button" value="<{$lang_get_addr}>" onclick="webmap_gmap_setAddressJp()" />
+<{/if}>
+
+<{if $show_close }>
+  <input type="button" value="<{$lang_close}>" onclick="window.close()" />
+<{/if}>
+
+<{if $show_disp_off }>
+  <input type="button" value="<{$lang_disp_off}>" onclick="webmap_gmap_dispOff()">
+<{/if}>
+
+<br /><br />
+
+</body>
+</html>

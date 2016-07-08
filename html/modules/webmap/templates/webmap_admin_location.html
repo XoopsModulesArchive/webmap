@@ -1,0 +1,76 @@
+<{* $Id: webmap_admin_location.html,v 1.1 2009/03/06 11:45:55 ohwada Exp $ *}>
+
+<{if $show_default_css }>
+  <link href="<{$xoops_url}>/modules/<{$xoops_dirname}>/include/default.css" type="text/css" rel="stylesheet"/>
+<{/if}>
+
+<iframe src="<{$xoops_url}>/modules/<{$xoops_dirname}>/index.php?fct=get_location" 
+	width="<{$map_width}>" height="<{$map_height}>" frameborder="0" scrolling="yes" >
+<{$lang_iframe_not_support}>
+</iframe>
+
+<form action="#" method="post">
+<input type="hidden" name="op" value="edit" />
+<input type="hidden" name="XOOPS_G_TICKET" value="<{$ticket}>" />
+<table width='100%' class='outer' cellspacing='1'>
+<tr>
+	<th colspan='2'><{$lang_conf_location}></th>
+</tr>
+<tr>
+	<td class="head"><{$lang_latitude}></td>
+	<td class="even">
+		<{$latitude}><br />
+		<input type="text" id="webmap_latitude" name="webmap_latitude" value="<{$latitude}>" size="50" />
+	</td>
+</tr>
+<tr>
+	<td class="head"><{ $lang__LONGITUDE}></td>
+	<td class="even">
+		<{$longitude}><br />
+		<input type="text" id="webmap_longitude" name="webmap_longitude" value="<{$longitude}>" size="50" />
+	</td>
+</tr>
+<tr>
+	<td class="head"><{$lang_zoom}></td>
+	<td class="even">
+		<{$zoom}><br />
+		<input type="text" id="webmap_zoom" name="webmap_zoom" value="<{$zoom}>" size="50" />
+	</td>
+</tr>
+<tr>
+	<td class="head"></td>
+	<td class="even"><input type="submit" value="<{$lang_edit}>" /></td>
+</tr>
+</table>
+</form>
+<br />
+
+<form action="#" method="post">
+<input type="hidden" name="op" value="edit" />
+<input type="hidden" name="XOOPS_G_TICKET" value="<{$ticket}>" />
+<table width='100%' class='outer' cellspacing='1'>
+<tr>
+	<th colspan='2'><{$lang_conf_address}></th>
+</tr>
+<tr>
+	<td class="head"><{$lang_address}></td>
+	<td class="even">
+		<{$address_s}><br />
+		<input type="text" id="webmap_address" name="webmap_address" value="<{$address_s}>" size="50" />
+	</td>
+</tr>
+<tr>
+	<td class="head"></td>
+	<td class="even"><input type="submit" value="<{$lang_edit}>" /></td>
+</tr>
+</table>
+</form>
+<br />
+
+<hr />
+<div style="text-align: right; font-size: 80%;">
+<a href="http://linux2.ohwada.net/" target="_blank">
+Powered by Happy Linux
+</a><br />
+&copy; 2007, Kenichi OHWADA<br />
+</div>

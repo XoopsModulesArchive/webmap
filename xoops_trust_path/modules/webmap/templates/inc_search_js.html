@@ -1,0 +1,123 @@
+<{* $Id: inc_search_js.html,v 1.1.1.1 2009/02/23 03:26:43 ohwada Exp $ *}>
+
+<{if $show_google_js }>
+  <script src="http://maps.google.com/maps?file=api&amp;hl=<{$xoops_langcode}>&amp;v=2&amp;key=<{$apikey}>" type="text/javascript" charset="utf-8"></script>
+<{/if}>
+
+<{if $show_gmap_js }>
+  <script src="<{$xoops_url}>/modules/<{$xoops_dirname}>/libs/gmap.js" type="text/javascript"></script>
+<{/if}>
+
+<script type="text/javascript">
+//<![CDATA[
+
+<{* value: numeric *}>
+<{if $latitude != "" }>
+	webmap_gmap_default_latitude = <{$latitude}>;
+<{/if}>
+<{if $longitude != "" }>
+	webmap_gmap_default_longitude = <{$longitude}>;
+<{/if}>
+<{if $zoom != "" }>
+	webmap_gmap_default_zoom = <{$zoom}>;
+<{/if}>
+
+<{* value: strings *}>
+<{if $module_url }>
+	webmap_gmap_module_url = "<{$module_url}>";
+<{/if}>
+<{if $marker_url }>
+	webmap_gmap_marker_url = "<{$marker_url}>";
+<{/if}>
+<{if $opener_mode }>
+	webmap_gmap_opener_mode = "<{$opener_mode}>";
+<{/if}>
+<{if $map_type }>
+	webmap_gmap_map_type = "<{$map_type}>";
+<{/if}>
+<{if $map_control }>
+	webmap_gmap_map_control = "<{$map_control}>";
+<{/if}>
+<{if $type_control }>
+	webmap_gmap_type_control = "<{$type_control}>";
+<{/if}>
+<{if $loc_marker_html != "" }>
+	webmap_gmap_location_marker_html = "<{$loc_marker_html}>";
+<{/if}>
+<{if $geocode_kind }>
+	webmap_gmap_geocode_kind = "<{$geocode_kind}>";
+<{/if}>
+<{if $geo_url }>
+	webmap_gmap_geo_url = "<{$geo_url}>";
+<{/if}>
+<{if $element_map }>
+	webmap_gmap_element_map = "<{$element_map}>";
+<{/if}>
+<{if $element_list }>
+	webmap_gmap_element_list = "<{$element_list}>";
+<{/if}>
+<{if $element_search }>
+	webmap_gmap_element_search = "<{$element_search}>";
+<{/if}>
+<{if $element_map }>
+	webmap_gmap_element_current_location = "<{$element_current_location}>";
+<{/if}>
+<{if $element_map }>
+	webmap_gmap_element_current_address = "<{$element_current_address}>";
+<{/if}>
+
+<{* value: strings : "true" or "false" *}>
+<{if $use_scale_control != "" }>
+	webmap_gmap_use_scale_control = <{$use_scale_control}>;
+<{/if}>
+<{if $use_overview_map_control != "" }>
+	webmap_gmap_use_overview_map_control = <{$use_overview_map_control}>;
+<{/if}>
+<{if $use_draggable_marker != "" }>
+	webmap_gmap_use_draggable_marker = <{$use_draggable_marker}>;
+<{/if}>
+<{if $use_search_marker != "" }>
+	webmap_gmap_use_search_marker = <{$use_search_marker}>;
+<{/if}>
+<{if $use_loc_marker != "" }>
+	webmap_gmap_use_location_marker = <{$use_loc_marker}>;
+<{/if}>
+<{if $use_loc_marker_click != "" }>
+	webmap_gmap_use_location_marker_click = <{$use_loc_marker_click}>;
+<{/if}>
+<{if $use_nishioka_inverse != "" }>
+	webmap_gmap_use_nishioka_inverse = <{$use_nishioka_inverse}>;
+<{/if}>
+<{if $use_set_parent_location != "" }>
+	webmap_gmap_use_set_parent_location =  <{$use_set_parent_location}>;
+<{/if}>
+<{if $use_set_parent_address != "" }>
+	webmap_gmap_use_set_parent_address =  <{$use_set_parent_address}>;
+<{/if}>
+
+<{* value: strings : Language *}>
+<{if $lang_latitude }>
+	webmap_gmap_lang_latitude = "<{$lang_latitude}>";
+<{/if}>
+<{if $lang_longitude }>
+	webmap_gmap_lang_longitude = "<{$lang_longitude}>";
+<{/if}>
+<{if $lang_zoom }>
+	webmap_gmap_lang_zoom = "<{$lang_zoom}>";
+<{/if}>
+<{if $lang_not_compatible }>
+	webmap_gmap_lang_not_compatible  = "<{$lang_not_compatible}>";
+<{/if}>
+<{if $lang_no_match_place }>
+	webmap_gmap_lang_no_match_place  = "<{$lang_no_match_place}>";
+<{/if}>
+
+	window.onload   = webmap_gmap_load_search;
+	window.onunload = GUnload;
+
+//]]>
+</script>
+
+<{if $show_element }>
+  <div id="<{$element}>" style="<{$style}>">Loading ...</div>
+<{/if}>
